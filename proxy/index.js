@@ -28,8 +28,7 @@ app.post("/", function (req, res) {
       }
 
       res.status(error.response.status).json({
-        requestBody: req.body.data,
-        responseBOdy: error.response.data,
+        responseBody: error.response.data,
       });
     });
 });
