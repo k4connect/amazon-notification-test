@@ -6,7 +6,7 @@ const hashedPassword =
 const validatePassword = () => {
   const storedPassword = sessionStorage.getItem("password");
   const password = storedPassword || prompt("Enter the password");
-  const isCorrect = bcrypt.compareSync(password, hashedPassword);
+  const isCorrect = password && bcrypt.compareSync(password, hashedPassword);
 
   if (!isCorrect) return false;
 
