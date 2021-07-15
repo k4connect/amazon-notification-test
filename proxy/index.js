@@ -27,7 +27,10 @@ app.post("/", function (req, res) {
         return res.status(500).json({ error });
       }
 
-      res.status(error.response.status).json(error.response.data);
+      res.status(error.response.status).json({
+        requestBody: req.body.data,
+        responseBOdy: error.response.data,
+      });
     });
 });
 

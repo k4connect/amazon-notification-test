@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 import { useState } from "react";
 import { sendNotification } from "./utils/notifications";
 import { validatePassword } from "./utils/passwords";
+import { ACCESS_TOKEN, RECIPIENT_ID } from "./constants";
 
 const isPasswordCorrect = validatePassword();
 
@@ -11,14 +12,13 @@ const App = () => {
   const [isSending, setIsSending] = useState(false);
   const [wasSent, setWasSent] = useState(false);
   const [message, setMessage] = useState("This is a test notification");
-  const [recipientID, setRecipientID] = useState(
-    "amzn1.alexa.unit.did.AGAGPJ34FLNNVIR76DCG3SSMN6QBCYZ5G6P6HSADPBLYGCMEK7GJVKO2Z4PWLSYHKIR2O3MXX3XPVVFWVYKH74FMHDFIX3544ZXX5IMB"
-  );
+  const [recipientID, setRecipientID] = useState(RECIPIENT_ID);
+  const [accessToken, setAccessToken] = useState(ACCESS_TOKEN);
   const [resultMessage, setResultMessage] = useState("");
 
   const handleSendNotification = () => {
     setIsSending(true);
-    sendNotification(message, recipientID)
+    sendNotification(accessToken, message, recipientID)
       .then(() => {
         setResultMessage("The notification was sent!");
       })
@@ -41,6 +41,13 @@ const App = () => {
         helperText="Enter the recipient ID you want to send the notification to"
         value={recipientID}
         onChange={(e) => setRecipientID(e.target.value)}
+        style={{ width: "90%", marginBottom: 50 }}
+      />
+      <TextField
+        label="Access Token"
+        helperText="Enter the Access Token"
+        value={accessToken}
+        onChange={(e) => setAccessToken(e.target.value)}
         style={{ width: "90%", marginBottom: 50 }}
       />
       <TextField
