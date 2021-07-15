@@ -3,10 +3,7 @@ import { TextField, Snackbar } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { useState } from "react";
 import { sendNotification } from "./utils/notifications";
-import { validatePassword } from "./utils/passwords";
 import { ACCESS_TOKEN, RECIPIENT_ID } from "./constants";
-
-const isPasswordCorrect = validatePassword();
 
 const App = () => {
   const [isSending, setIsSending] = useState(false);
@@ -30,8 +27,6 @@ const App = () => {
         setWasSent(true);
       });
   };
-
-  if (!isPasswordCorrect) return <div>Incorrect password</div>;
 
   return (
     <div className="App">
